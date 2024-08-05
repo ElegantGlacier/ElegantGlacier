@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "ElegantGlacier\\": "src/"
+        },
+        "files": [
+            "src/ElegantGlacier.php"
+        ]
+    },
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
