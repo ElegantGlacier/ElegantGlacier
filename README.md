@@ -1,45 +1,141 @@
-# Elegant Glacier
+# ElegantGlacier
 
-Welcome to **Elegant Glacier**, a part of our organization dedicated to making the lives of WordPress developers easier. Inspired by the principles of the Timber framework, we aim to simplify the process of building WordPress themes by providing tools and resources that allow you to separate the logic of your theme from the presentation layer using the Twig Template Engine.
+ElegantGlacier is a minimal PHP library designed to integrate Twig templating with WordPress. It provides utility functions that wrap around WordPress functions to make them more readable and maintainable.
 
-## About Elegant Glacier
+## Installation
 
-Elegant Glacier is a PHP framework that enables developers to create fully-customized WordPress themes with ease. By leveraging the power of Twig, Elegant Glacier allows you to keep your theme logic cleanly separated from your presentation layer, making your themes more maintainable and easier to update.
+To install ElegantGlacier, follow these steps:
 
-## Features
+1. Navigate to your WordPress theme directory.
+2. Run the following command to require ElegantGlacier using Composer:
 
-- **Separation of Concerns**: Elegant Glacier promotes a clear separation between your theme's logic and its presentation layer, enabling you to write cleaner, more maintainable code.
-- **Twig Template Engine**: Use the powerful and flexible Twig Template Engine to design your WordPress themes.
-- **Easy to Learn and Use**: With comprehensive documentation and a supportive community, Elegant Glacier is accessible to developers of all skill levels.
-- **Scalable and Extensible**: Designed to handle themes of all sizes, from simple blogs to complex websites.
+   ```sh
+   composer require your-vendor/elegant-glacier
+   ```
 
-## Getting Started
+Usage
 
-To get started with Elegant Glacier, follow these steps:
+To use ElegantGlacier in your WordPress theme, follow these steps:
+1. Initialize ElegantGlacier
 
-1. **Installation**: Add Elegant Glacier to your WordPress theme by including the following in your `functions.php` file:
+Add the following lines to your theme’s functions.php file to initialize ElegantGlacier:
+
+```php
+// Load Composer dependencies.
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Initialize ElegantGlacier.
+ElegantGlacier::init();
+```
+
+2. Render a Template
+
+In your template files (e.g., index.php), you can render Twig templates using the ElegantGlacier::render method. Here is an example:
+
+```php
+<?php
+// Load Composer dependencies.
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Initialize ElegantGlacier.
+ElegantGlacier::init();
+
+// Render the template.
+ElegantGlacier::render('index.twig', [
+    'title' => 'Welcome to ElegantGlacier',
+    'content' => 'This is a sample page using ElegantGlacier.'
+]);
+?>
+
+```
+
+Utility Functions
+
+ElegantGlacier provides several utility functions that wrap around WordPress functions to make them more readable. Here are a few examples:
+
+    getTitle: Gets the title of the current post or page.
     ```php
-    // Installation instructions go here
+    $title = ElegantGlacier::getTitle();
     ```
-2. **Setup**: Configure Elegant Glacier to work with your theme by setting up your directories and initializing Twig.
-3. **Development**: Start building your theme by creating Twig templates and using Elegant Glacier's powerful features to manage your theme's logic.
 
-## Documentation
+    getContent: Gets the content of the current post or page.
+    ```php
+    $content = ElegantGlacier::getContent();
+    ```
+    getPosts: Gets a list of posts based on the specified query arguments.
+    ```php
+    $posts = ElegantGlacier::getPosts([
+    'post_type' => 'post',
+    'posts_per_page' => 10
+]);
 
-Comprehensive documentation for Elegant Glacier is available [here](link-to-documentation). You can find guides, tutorials, and API references to help you make the most out of our framework.
+    ```
 
-## Contributing
+    Example
 
-We welcome contributions from the community! If you'd like to contribute to Elegant Glacier, please read our [contributing guidelines](link-to-contributing-guidelines) and check out our open issues on GitHub.
+Here's a complete example of how you can use ElegantGlacier in your theme:
 
-## Support
+    Add the initialization code to functions.php:
+    ```php
+    // Load Composer dependencies.
+require_once __DIR__ . '/vendor/autoload.php';
 
-If you need help or have any questions, feel free to reach out to our community on [GitHub Discussions](link-to-discussions) or join our [Slack channel](link-to-slack).
+// Initialize ElegantGlacier.
+ElegantGlacier::init();
 
-## License
+    ```
+    Create an index.php file to render the template:
+    ```php
+    <?php
+// Load Composer dependencies.
+require_once __DIR__ . '/vendor/autoload.php';
 
-Elegant Glacier is open-source software licensed under the [MIT License](link-to-license). Feel free to use, modify, and distribute it as you see fit.
+// Initialize ElegantGlacier.
+ElegantGlacier::init();
 
----
+// Render the template.
+ElegantGlacier::render('index.twig', [
+    'title' => 'Welcome to ElegantGlacier',
+    'content' => 'This is a sample page using ElegantGlacier.'
+]);
+?>
+```
+Create the index.twig template in your templates directory:
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <div>{{ content }}</div>
+</body>
+</html>
 
-Thank you for being a part of the Elegant Glacier community! We can't wait to see the amazing themes you'll create.
+```
+Directory Structure
+
+After setting up, your directory structure should look like this:
+```
+elegant-glacier/
+├── composer.json
+├── src/
+│   └── ElegantGlacier.php
+├── templates/
+│   └── index.twig
+└── cache/
+
+```
+
+Contributing
+
+If you would like to contribute to ElegantGlacier, please fork the repository and submit a pull request. We welcome contributions of all kinds, including documentation improvements, bug fixes, and new features.
+License
+
+ElegantGlacier is open-source software licensed under the MIT license.
+
+```
+This README file provides clear installation instructions, usage examples, and a brief overview of the utility functions included in the `ElegantGlacier` library. It should help developers get started quickly and understand how to integrate the library into their WordPress themes.
+
+```
