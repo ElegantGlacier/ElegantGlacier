@@ -7,8 +7,8 @@ use Twig\Loader\FilesystemLoader;
 class ElegantGlacier {
     private static $twig;
 
-    public static function init() {
-        $loader = new FilesystemLoader(__DIR__ . '/../templates');
+    public static function init($path) {
+        $loader = new FilesystemLoader($path . '/../templates');
         self::$twig = new Environment($loader, [
             'cache' => __DIR__ . '/../cache',
         ]);
