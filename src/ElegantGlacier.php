@@ -8,7 +8,7 @@ class ElegantGlacier {
     private static $twig;
 
     public static function init($path) {
-        $loader = new FilesystemLoader($path . '/../templates');
+        $loader = new FilesystemLoader($path . '/templates');
         self::$twig = new Environment($loader, [
             'cache' => $path . '/cache',
         ]);
