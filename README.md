@@ -47,7 +47,6 @@ ElegantGlacier::render('index.twig', [
     'content' => 'This is a sample page using ElegantGlacier.'
 ]);
 ?>
-
 ```
 
 Utility Functions
@@ -55,17 +54,14 @@ Utility Functions
 ElegantGlacier provides several utility functions that wrap around WordPress functions to make them more readable. Here are a few examples:
 getTitle: Gets the title of the current post or page.
 ```php
-<?php
-    $title = ElegantGlacier::getTitle();
+ $ title = ElegantGlacier::getTitle();
 ```
 getContent: Gets the content of the current post or page.
 ```php
-<?php
 $content = ElegantGlacier::getContent();
 ```
 getPosts: Gets a list of posts based on the specified query arguments.
 ```php
-<?php
 $posts = ElegantGlacier::getPosts([
 'post_type' => 'post',
 'posts_per_page' => 10
@@ -74,8 +70,7 @@ $posts = ElegantGlacier::getPosts([
 ```
 
 
-Contributing
-
+## Contributing
 If you would like to contribute to ElegantGlacier, please fork the repository and submit a pull request. We welcome contributions of all kinds, including documentation improvements, bug fixes, and new features.
 License
 
