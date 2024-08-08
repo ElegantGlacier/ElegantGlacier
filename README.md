@@ -49,6 +49,12 @@ ElegantGlacier::render('index.twig', [
 ?>
 ```
 
+3. Create a Template
+First create the template directory in the theme folder and then create a `index.twig` file
+```
+<h1>{{ title }}</h1>
+```
+
 Utility Functions
 
 ElegantGlacier provides several utility functions that wrap around WordPress functions to make them more readable. Here are a few examples:
