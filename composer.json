@@ -1,4 +1,18 @@
 {
+    "name": "codersandip/my-first-package",
+    "description": "This is my package my-first-package",
+    "keywords": [
+        "wordpress",
+        "twing"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Azibom",
+            "email": "mrsh13610@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "ElegantGlacier\\": "src/"
