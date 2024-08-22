@@ -6,14 +6,13 @@ use Twig\Loader\FilesystemLoader;
 
 class ElegantGlacier {
     private static $twig;
-    private static $site_url;
-
-    private static $router;
+    private static $base_path;
 
     public static function init($path) {
         $loader = new FilesystemLoader($path . '/templates');
-        self::$router = new Router();
-        self::$site_url = rtrim(get_site_url(), '/');
+        $home_url = get_home_url();
+        $parsed_url = parse_url($home_url, PHP_URL_PATH);
+        self::$base_path = rtrim($parsed_url, '/') . '/';
         self::$twig = new Environment($loader, [
 //            'cache' => $path . '/cache',
         ]);
@@ -53,10 +52,10 @@ class ElegantGlacier {
         
         $router = self::getRouterInstance();
         // Define default routes
-        $router->addRoute('GET', '/wordpress/', 'HomeController@index');
-        $router->addRoute('GET', '/wordpress/post', 'PostController@index');
-        $router->addRoute('GET', '/wordpress/post/:id', 'PostController@show');
-        $router->addRoute('GET', '/wordpress/page/:id', 'PageController@show');
+        $router->addRoute('GET', self::$base_path, 'HomeController@index');
+        $router->addRoute('GET', self::$base_path . 'post', 'PostController@index');
+        $router->addRoute('GET', self::$base_path . 'post/:id', 'PostController@show');
+        $router->addRoute('GET', self::$base_path . 'page/:id', 'PageController@show');
 
         // Match and dispatch routes
         // add_action('template_redirect', function() use ($router) {
@@ -93,8 +92,8 @@ class ElegantGlacier {
 
         // Add routes for the custom post type
         $router = self::getRouterInstance();
-        $router->addRoute('GET', "/wordpress/$name", ucfirst($name) . 'Controller@index');
-        $router->addRoute('GET', "/wordpress/$name/:id", ucfirst($name) . 'Controller@show');
+        $router->addRoute('GET', self::$base_path . "$name", ucfirst($name) . 'Controller@index');
+        $router->addRoute('GET', self::$base_path . "$name/:id", ucfirst($name) . 'Controller@show');
 
         // Match and dispatch routes
         add_action('template_redirect', function() use ($router) {
