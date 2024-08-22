@@ -15,10 +15,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "ElegantGlacier\\": "src/"
+            "ElegantGlacier\\": "src/",
+            "ElegantGlacier\\Controllers\\": "src/Controllers/"
         },
         "files": [
             "src/ElegantGlacier.php"
+            
         ]
     },
     "require": {
