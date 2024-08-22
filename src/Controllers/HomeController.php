@@ -6,6 +6,7 @@ use ElegantGlacier\ElegantGlacier;
 class HomeController {
     public function index() {
         $context = [
+            'site_name' => 'Elegant',
             'latest_posts' => ElegantGlacier::getPosts([
                 'post_type' => 'post',
                 'posts_per_page' => 5
@@ -16,6 +17,6 @@ class HomeController {
             ]),
         ];
 
-        ElegantGlacier::render('theme/defaultTheme/templates/home.twig', $context);
+        ElegantGlacier::render('themes/defaultTheme/templates/home.twig', $context);
     }
 }

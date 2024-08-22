@@ -11,7 +11,7 @@ class ElegantGlacier {
     private static $router;
 
     public static function init($path) {
-        $loader = new FilesystemLoader($path . '/templates');
+        $loader = new FilesystemLoader($path . '/vendor/elegant-glacier/elegant-glacier/src');
         self::$base_path = rtrim(parse_url(get_site_url(), PHP_URL_PATH), '/') . '/';
         self::$twig = new Environment($loader, [
 //            'cache' => $path . '/cache',
@@ -19,7 +19,7 @@ class ElegantGlacier {
 
         add_action('template_redirect', function() {
             $router = self::getRouterInstance();
-            $router->matchRoute();
+            $router->matchClassRoute();
         });
     }
 
@@ -103,7 +103,7 @@ class ElegantGlacier {
     }
 
     protected static function generateTemplatesForCustomPostType($name) {
-        $templatesDir = __DIR__ . "/theme/defaultTheme/templates/";
+        $templatesDir = __DIR__ . "/themes/defaultTheme/templates/";
 
         // Ensure the templates directory exists
         if (!is_dir($templatesDir)) {

@@ -1,7 +1,7 @@
 module.exports = {
   content: [
-    'src/themes/defaultTheme/templates/**/*.twig',
-    'src/themes/defaultTheme/partials/**/*.twig',
+    './src/themes/defaultTheme/templates/**/*.twig',
+    './src/themes/defaultTheme/partials/**/*.twig',
   ],
   theme: {
     extend: {},
