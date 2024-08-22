@@ -8,11 +8,11 @@ class ElegantGlacier {
     private static $twig;
     private static $base_path;
 
+    private static $router;
+
     public static function init($path) {
         $loader = new FilesystemLoader($path . '/templates');
-        $home_url = get_home_url();
-        $parsed_url = parse_url($home_url, PHP_URL_PATH);
-        self::$base_path = rtrim($parsed_url, '/') . '/';
+        self::$base_path = rtrim(parse_url(get_site_url(), PHP_URL_PATH), '/') . '/';
         self::$twig = new Environment($loader, [
 //            'cache' => $path . '/cache',
         ]);
@@ -53,8 +53,9 @@ class ElegantGlacier {
         $router = self::getRouterInstance();
         // Define default routes
         $router->addRoute('GET', self::$base_path, 'HomeController@index');
-        $router->addRoute('GET', self::$base_path . 'post', 'PostController@index');
+        $router->addRoute('GET', self::$base_path . 'posts', 'PostController@index');
         $router->addRoute('GET', self::$base_path . 'post/:id', 'PostController@show');
+        $router->addRoute('GET', self::$base_path . 'pages/', 'PageController@index');
         $router->addRoute('GET', self::$base_path . 'page/:id', 'PageController@show');
 
         // Match and dispatch routes
@@ -178,3 +179,8 @@ PHP;
 
 // Ensure that this file's functions are globally accessible
 class_alias('ElegantGlacier\\ElegantGlacier', 'ElegantGlacier');
+
+
+
+
+
