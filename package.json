@@ -1,0 +1,21 @@
+{
+  "name": "elegantglacier",
+  "version": "1.0.0",
+  "description": "Using WordPress can present various challenges for new developers. Below are some of these challenges:\r ### 1. Routing\r    The complexity of the URL rewriting system.\r    Issues related to setting and changing Permalink structures.\r    Interference of theme and plugin rewrite rules with the core WordPress system.\r ### 2. Lack of a Template Engine\r    By default, WordPress does not use a template engine like modern systems such as Twig or Blade. This forces developers to mix PHP code within views, leading to messy and unreadable code and reducing the capability for frontend inheritance.\r ### 3. Lack of a Designated Place for Writing Logic\r    ElegantGlacier is a minimal PHP library designed to integrate Twig templating with WordPress. It provides utility functions that wrap around WordPress functions to make them more readable and maintainable.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "postcss src/themes/defaultTheme/assets/css/tailwind.css -o src/themes/defaultTheme/assets/css/output.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10"
+  },
+  "devDependencies": {
+    "postcss-cli": "^11.0.0"
+  }
+}

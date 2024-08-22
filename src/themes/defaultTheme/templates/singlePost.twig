@@ -1,0 +1,12 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <article class="bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-4xl font-bold mb-4">{{ title }}</h1>
+        <div class="prose">
+            {{ content|raw }}
+        </div>
+    </article>
+</div>
+{% endblock %}

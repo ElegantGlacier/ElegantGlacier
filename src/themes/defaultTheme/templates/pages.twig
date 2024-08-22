@@ -1,0 +1,20 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <header class="mb-8">
+        <h2 class="text-4xl font-bold mb-4">Pages</h2>
+        <p class="text-lg mb-6">Here are the latest pages on our site.</p>
+    </header>
+
+    <section>
+        <ul class="list-disc pl-5">
+            {% for page in pages %}
+                <li class="mb-2">
+                    <a href="/pages/{{ page.ID }}" class="text-blue-500 hover:text-blue-700">{{ page.post_title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}
