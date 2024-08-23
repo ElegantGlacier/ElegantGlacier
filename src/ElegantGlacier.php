@@ -55,7 +55,7 @@ class ElegantGlacier {
         $router->addRoute('GET', self::$base_path, 'HomeController@index');
         $router->addRoute('GET', self::$base_path . 'posts', 'PostController@index');
         $router->addRoute('GET', self::$base_path . 'post/:id', 'PostController@show');
-        $router->addRoute('GET', self::$base_path . 'pages/', 'PageController@index');
+        $router->addRoute('GET', self::$base_path . 'pages', 'PageController@index');
         $router->addRoute('GET', self::$base_path . 'page/:id', 'PageController@show');
 
         // Match and dispatch routes
