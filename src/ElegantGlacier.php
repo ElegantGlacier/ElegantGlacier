@@ -16,7 +16,7 @@ class ElegantGlacier {
 
         self::$twig->addFunction(new TwigFunction('asset', function ($path) {
             // Adjust base URL if needed
-            return '/wp-content/themes/MyTheme/assets/' . $path;
+            return '/wp-content/themes/' . $path;
         }));
     }
 
