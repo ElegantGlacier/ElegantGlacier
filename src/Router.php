@@ -38,13 +38,13 @@ class Router {
                 if (preg_match('#^' . $pattern . '$#', $url, $matches)) {
                     $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
                     list($controller, $action) = explode('@', $target);
-                    $controller = "ElegantGlacier\\Controllers\\{$controller}";
+                    $controller = "Controllers\\{$controller}";
                     if (class_exists($controller) && method_exists($controller, $action)) {
                         $controllerInstance = new $controller;
                         call_user_func_array([$controllerInstance, $action], $params);
                     } else {
                         header("HTTP/1.0 404 Not Found");
-                        echo "Not Found";
+                        echo "Not Found---";
                     }
                     return;
                 }

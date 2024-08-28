@@ -3,6 +3,7 @@ namespace ElegantGlacier;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 class ElegantGlacier {
     private static $twig;
@@ -12,6 +13,11 @@ class ElegantGlacier {
         self::$twig = new Environment($loader, [
 //            'cache' => $path . '/cache',
         ]);
+
+        self::$twig->addFunction(new TwigFunction('asset', function ($path) {
+            // Adjust base URL if needed
+            return '/wordpress/wp-content/themes/MyTheme/assets/' . $path;
+        }));
     }
 
     public static function render($template, $context = []) {

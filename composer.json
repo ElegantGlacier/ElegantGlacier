@@ -15,8 +15,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "ElegantGlacier\\": "src/",
-            "ElegantGlacier\\Controllers\\": "src/Controllers/"
+            "ElegantGlacier\\": "src/"
         },
         "files": [
             "src/ElegantGlacier.php"
