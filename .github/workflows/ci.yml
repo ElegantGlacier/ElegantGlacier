@@ -1,0 +1,49 @@
+name: ELEGANT CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [7.4, 8.0, 8.1, 8.2]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: mbstring, xml, json, pdo_mysql, dom
+        coverage: none
+
+    - name: Install Composer dependencies
+      run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+    - name: Set up WordPress environment
+      run: |
+        sudo mkdir -p /var/www/html
+        sudo mv ./* /var/www/html
+        cd /var/www/html
+        composer install
+
+    - name: Run PHPUnit
+      run: ./vendor/bin/phpunit --configuration phpunit.xml.dist
+
+    - name: Upload PHPUnit code coverage
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage
+        path: coverage.xml

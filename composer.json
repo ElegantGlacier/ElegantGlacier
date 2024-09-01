@@ -1,0 +1,32 @@
+{
+    "name": "elegant-glacier/elegant-glacier",
+    "description": "This is my package ElegantGlacier",
+    "keywords": [
+        "wordpress",
+        "twing"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Azibom",
+            "email": "mrsh13610@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ElegantGlacier\\": "src/"
+        },
+        "files": [
+            "src/ElegantGlacier.php"
+            
+        ]
+    },
+    "require": {
+        "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "10up/wp_mock": "^1.0",
+        "phpunit/phpunit": "^9.6"
+    }
+}
