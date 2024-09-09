@@ -60,4 +60,7 @@ class ElegantGlacier {
 }
 
 // Ensure that this file's functions are globally accessible
+
 class_alias('ElegantGlacier\\ElegantGlacier', 'ElegantGlacier');
+
+
