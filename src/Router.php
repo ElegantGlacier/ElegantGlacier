@@ -44,7 +44,8 @@ class Router {
                         call_user_func_array([$controllerInstance, $action], $params);
                     } else {
                         header("HTTP/1.0 404 Not Found");
-                        echo "Not Found---";
+
+                        echo "Not Found";
                     }
                     return;
                 }
@@ -55,3 +56,4 @@ class Router {
         echo "404 Not Found";
     }
 }
+
