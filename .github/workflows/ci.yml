@@ -39,7 +39,7 @@ jobs:
         composer install
 
     - name: Run PHPUnit
-      run: ./vendor/bin/phpunit --configuration phpunit.xml.dist
+      run: phpunit.xml --configuration phpunit.xml.dist
 
     - name: Upload PHPUnit code coverage
       if: success()
