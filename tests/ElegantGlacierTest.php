@@ -2,7 +2,7 @@
 
 namespace ElegantGlacier\Tests;
 
-require_once 'wp-load.php';
+require_once getenv('WP_LOAD_PATH');
 
 use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
