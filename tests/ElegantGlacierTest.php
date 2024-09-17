@@ -15,9 +15,16 @@ class ElegantGlacierTest extends TestCase
     {
         parent::setUp();
         Functions\stubs([
-            'wp_get_current_user',
-            'get_option',
-            'update_option'
+            'get_the_title' => 'Sample Title',
+            'add_action' => function() {},
+            'get_the_content' => 'Sample Content',
+            'WP_Query' => function() {
+        return new class {
+            public function get_posts() {
+                return []; 
+            }
+        };
+    }
         ]);
     }
 
@@ -30,7 +37,7 @@ class ElegantGlacierTest extends TestCase
 
     public function testInit()
     {
-        ElegantGlacier::init(__DIR__ . '/../../../..');
+        ElegantGlacier::init(__DIR__);
         $reflection = new ReflectionClass(ElegantGlacier::class);
         $property = $reflection->getProperty('twig');
         $property->setAccessible(true);
