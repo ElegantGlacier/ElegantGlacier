@@ -13,11 +13,13 @@ class ElegantGlacierTest extends TestCase
 
     public function setUp(): void
     {
-        Functions\stubs()->create();
+        parent::setUp();
+        Functions\stubs();
     }
 
     public function tearDown(): void
     {
+        parent::tearDown();
         Functions\stubs()->reset();
     }
 
