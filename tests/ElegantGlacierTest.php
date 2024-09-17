@@ -6,19 +6,19 @@ require_once __DIR__ . '/../wordpress/wp-load.php';
 
 use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
-use WP_Mock;
+use Brain\Monkey\Functions;
 
 class ElegantGlacierTest extends TestCase
 {
 
     public function setUp(): void
     {
-        \WP_Mock::setUp();
+        Functions\stubs()->create();
     }
 
     public function tearDown(): void
     {
-        \WP_Mock::tearDown();
+        Functions\stubs()->reset();
     }
 
 

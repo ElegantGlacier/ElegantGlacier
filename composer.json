@@ -28,10 +28,10 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",        
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "phpunit/phpunit": "^9.0"
     },
-    "require-dev": {                  
-        "phpunit/phpunit": "^9.0",
-        "wp-mock/wp-mock": "^0.4.0"
+    "require-dev": {                 
+        "brain/monkey": "^2.0"
     }
 }
