@@ -8,13 +8,14 @@ use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
 use Brain\Monkey\Functions;
 use Brain\Monkey\WP\Filters;
+use Mockery;
 
 class ElegantGlacierTest extends TestCase
 {
-
+    
     protected function setUp(): void
     {
-        parent::setUp();
+    parent::setUp();
         
         // Initialize BrainMonkey
         Functions\stubs([
@@ -38,17 +39,17 @@ class ElegantGlacierTest extends TestCase
 
     private function mockWPQuery()
     {
-        $this->mockClass('WP_Query', [
-            'query' => function() {
-                // Return mock data if needed
-            },
-            'have_posts' => function() {
-                return true; // Adjust as needed
-            },
-            'the_post' => function() {
-                // No-op or return mock data
-            },
-        ]);
+        $this->wpQueryMock = Mockery::mock('WP_Query');
+        $this->wpQueryMock->shouldReceive('query')->andReturn([]);
+        $this->wpQueryMock->shouldReceive('have_posts')->andReturn(true);
+        $this->wpQueryMock->shouldReceive('the_post')->andReturn(null);
+    }
+
+
+    protected function tearDown(): void
+    {
+        Mockery::close(); // Close Mockery
+        parent::tearDown();
     }
 
 

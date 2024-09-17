@@ -32,6 +32,7 @@
         "phpunit/phpunit": "^9.0"
     },
     "require-dev": {                 
-        "brain/monkey": "^2.0"
+        "brain/monkey": "^2.0",
+        "mockery/mockery": "^1.5"
     }
 }
