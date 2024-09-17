@@ -28,11 +28,11 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",        
-        "twig/twig": "^3.0",
-        "phpunit/phpunit": "^9.0"
+        "twig/twig": "^3.0"
     },
     "require-dev": {                 
-        "brain/monkey": "^2.0",
-        "mockery/mockery": "^1.5"
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.6",
+        "brain/monkey": "^2.8"
     }
 }

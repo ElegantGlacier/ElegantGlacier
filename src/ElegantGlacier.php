@@ -21,7 +21,7 @@ class ElegantGlacier {
     }
 
     public static function render($template, $context = []) {
-        echo self::$twig->render($template, $context);
+        return self::$twig->render($template, $context);
     }
 
     // Utility functions to wrap WordPress functions
