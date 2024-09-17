@@ -2,54 +2,13 @@
 
 namespace ElegantGlacier\Tests;
 
+require_once 'wp-load.php';
+
 use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
-use Brain\Monkey\Functions;
-use Brain\Monkey\WP\Filters;
-use Brain\Monkey;
-use Mockery;
 
 class ElegantGlacierTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        Brain\Monkey::setUp();
-        parent::setUp();
-
-        // Initialize BrainMonkey
-        Functions\stubs([
-            'post_type_exists' => function($post_type) {
-                return $post_type === 'portfolio'; // Adjust as needed
-            },
-            'get_the_title' => function() {
-                return 'Sample Title'; // Adjust as needed
-            },
-            'add_action' => function() {
-                // No-op for add_action
-            },
-            'get_the_content' => function() {
-                return 'Sample Content'; // Adjust as needed
-            },
-        ]);
-
-        // Mock WP_Query
-        $this->mockWPQuery();
-    }
-
-    private function mockWPQuery()
-    {
-        $this->wpQueryMock = Mockery::mock('WP_Query');
-        $this->wpQueryMock->shouldReceive('query')->andReturn([]);
-        $this->wpQueryMock->shouldReceive('have_posts')->andReturn(true);
-        $this->wpQueryMock->shouldReceive('the_post')->andReturn(null);
-        $this->wpQueryMock->posts = []; // Mock the `posts` property
-    }
-
-    protected function tearDown(): void
-    {
-        Mockery::close(); // Close Mockery
-        parent::tearDown();
-    }
 
     public function testInit()
     {
@@ -64,15 +23,30 @@ class ElegantGlacierTest extends TestCase
 
     public function testRender()
     {
+        // Assuming you have a Twig template at this location
+        $templatePath = __DIR__ . '/path/to/templates/test.twig';
+        file_put_contents($templatePath, '<p>{{ name }}</p>');
+
         ElegantGlacier::init(__DIR__);
         $output = ElegantGlacier::render('test.twig', ['name' => 'Test']);
-        $this->assertSame('<p>Test</p>', $output); // Ensure `test.twig` contains `<p>Test</p>`
+        $this->assertSame('<p>Test</p>', $output);
+        
+        // Clean up the template file after test
+        unlink($templatePath);
     }
 
     public function testGetTitle()
     {
+        // Insert a test post
+        $post_id = wp_insert_post([
+            'post_title'  => 'Test Title',
+            'post_content' => 'This is a test post',
+            'post_status' => 'publish',
+        ]);
+
         $title = ElegantGlacier::getTitle();
         $this->assertIsString($title);
+        $this->assertSame('Test Title', $title); // Adjust based on actual implementation
     }
 
     public function testPostTypeRegistration()
@@ -84,17 +58,33 @@ class ElegantGlacierTest extends TestCase
 
     public function testGetContent()
     {
+        // Insert a test post
+        $post_id = wp_insert_post([
+            'post_title'  => 'Test Title',
+            'post_content' => 'Test Content',
+            'post_status' => 'publish',
+        ]);
+
         $content = ElegantGlacier::getContent();
         $this->assertIsString($content);
+        $this->assertSame('Test Content', $content); // Adjust based on actual implementation
     }
 
     public function testGetPosts()
     {
+        // Insert a test post
+        wp_insert_post([
+            'post_title'  => 'Sample Post',
+            'post_content' => 'This is a sample post',
+            'post_status' => 'publish',
+        ]);
+
         $posts = ElegantGlacier::getPosts([
             'post_type' => 'post',
             'posts_per_page' => 1
         ]);
 
-        $this->assertCount(0, $posts); // Adjust according to mockWPQuery setup
+        $this->assertCount(1, $posts);
+        $this->assertEquals('Sample Post', $posts[0]->post_title);
     }
 }

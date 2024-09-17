@@ -58,17 +58,16 @@ class RouterTest extends TestCase
     }
 
     public function testMatchClassRoute()
-     {
-        
+    {
         $router = new Router();
         $router->addRoute('GET', '/item', 'TestController@TestAction');
         
+        // Register a TestController instance with dependency injection
+        $controller = new TestController();
+        $router->setController($controller);
+
         $_SERVER['REQUEST_URI'] = '/item';
         
-        // Use dependency injection to replace the class instance
-        $router->matchClassRoute();
-        
-        // Check output, using ob_start to capture echoed output
         ob_start();
         $router->matchClassRoute();
         $output = ob_get_clean();
@@ -76,26 +75,35 @@ class RouterTest extends TestCase
         $this->assertSame('test action executed', $output);
     }
 
-
     public function testMatchClassRouteWithParameters()
-     {
-
-        
+    {
         $router = new Router();
         $router->addRoute('GET', '/item/:id', 'TestController@TestParam');
         
+        // Register a TestController instance with dependency injection
+        $controller = new TestController();
+        $router->setController($controller);
+
         $_SERVER['REQUEST_URI'] = '/item/42';
         
-        // Use dependency injection to replace the class instance
-        $router->matchClassRoute();
-        
-        // Check output, using ob_start to capture echoed output
         ob_start();
         $router->matchClassRoute();
         $output = ob_get_clean();
 
         $this->assertSame('the id is 42', $output);
     }
+}
 
+// Example Controller for testing purposes
+class TestController
+{
+    public function TestAction()
+    {
+        echo 'test action executed';
+    }
 
+    public function TestParam($id)
+    {
+        echo 'the id is ' . htmlspecialchars($id);
+    }
 }
