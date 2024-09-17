@@ -1,0 +1,5 @@
+site_name: ElegantGlacier
+theme:
+  name: material
+nav:
+  - Home: index.md
