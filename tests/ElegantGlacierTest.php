@@ -14,7 +14,11 @@ class ElegantGlacierTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        Functions\stubs();
+        Functions\stubs(
+            'wp_get_current_user',
+            'get_option',
+            'update_option'
+        );
     }
 
     public function tearDown(): void
