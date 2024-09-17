@@ -1,4 +1,4 @@
-name: CI for ElegantGlacier - PHPUnit
+name: CI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,12 +19,20 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'  
-          extensions: mbstring, intl
-          coverage: xdebug
+          php-version: '8.1'  # Specify your PHP version
 
       - name: Install dependencies
-        run: composer install
+        run: |
+          composer install
+          sudo apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev
+          sudo docker pull wordpress:latest
+          
+      - name: Run WordPress
+        run: |
+          docker run -d --name wordpress -p 8080:80 wordpress:latest
+          
+      - name: Wait for WordPress to start
+        run: sleep 30  # Wait for WordPress to initialize
 
       - name: Run PHPUnit
         run: vendor/bin/phpunit --configuration phpunit.xml

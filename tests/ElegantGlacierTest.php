@@ -1,6 +1,6 @@
 <?php
 
-require_once 'c:\\xampp1\\htdocs\\wordpress\\wp-load.php';
+require_once __DIR__ . 'wp-load.php';
 
 use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
