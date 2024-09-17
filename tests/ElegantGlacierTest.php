@@ -7,31 +7,48 @@ namespace ElegantGlacier\Tests;
 use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
 use Brain\Monkey\Functions;
+use Brain\Monkey\WP\Filters;
 
 class ElegantGlacierTest extends TestCase
 {
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
+        
+        // Initialize BrainMonkey
         Functions\stubs([
-            'get_the_title' => 'Sample Title',
-            'add_action' => function() {},
-            'get_the_content' => 'Sample Content',
-            'WP_Query' => function() {
-        return new class {
-            public function get_posts() {
-                return []; 
-            }
-        };
-    }
+            'post_type_exists' => function($post_type) {
+                return $post_type === 'some_post_type'; // Adjust as needed
+            },
+            'get_the_title' => function() {
+                return 'Sample Title'; // Adjust as needed
+            },
+            'add_action' => function() {
+                // No-op for add_action
+            },
+            'get_the_content' => function() {
+                return 'Sample Content'; // Adjust as needed
+            },
         ]);
+
+        // Mock WP_Query
+        $this->mockWPQuery();
     }
 
-    public function tearDown(): void
+    private function mockWPQuery()
     {
-        parent::tearDown();
-        Functions\stubs()->reset();
+        $this->mockClass('WP_Query', [
+            'query' => function() {
+                // Return mock data if needed
+            },
+            'have_posts' => function() {
+                return true; // Adjust as needed
+            },
+            'the_post' => function() {
+                // No-op or return mock data
+            },
+        ]);
     }
 
 

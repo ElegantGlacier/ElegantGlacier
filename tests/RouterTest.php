@@ -59,8 +59,6 @@ class RouterTest extends TestCase
 
     public function testMatchClassRoute()
      {
-
-        class_alias('ElegantGlacier\Tests\Controllers\TestController', 'Controllers\TestController');
         
         $router = new Router();
         $router->addRoute('GET', '/item', 'TestController@TestAction');
