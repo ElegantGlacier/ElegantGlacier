@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__ . 'wp-load.php';
+namespace ElegantGlacier\Tests;
+
+require_once __DIR__ . '/../wordpress/wp-load.php';
 
 use ElegantGlacier\ElegantGlacier;
 use PHPUnit\Framework\TestCase;
