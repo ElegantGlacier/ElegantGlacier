@@ -45,6 +45,10 @@ jobs:
       - name: Set WP_LOAD_PATH environment variable
         run: echo "WP_LOAD_PATH=$(pwd)/wordpress/wp-load.php" >> $GITHUB_ENV
 
+      - name: Automatically fix coding standards issues with PHPCBF
+        run: |
+          vendor/bin/phpcbf src tests
+
       - name: Run PHP_CodeSniffer
         run: |
           vendor/bin/phpcs --standard=PSR12 src tests
