@@ -27,6 +27,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev
 
+      - name: Install PHP_CodeSniffer
+        run: |
+          composer require --dev "squizlabs/php_codesniffer=*"
+
       - name: Run WordPress
         run: |
           docker run -d --name wordpress -p 8080:80 wordpress:latest
@@ -40,6 +44,10 @@ jobs:
 
       - name: Set WP_LOAD_PATH environment variable
         run: echo "WP_LOAD_PATH=$(pwd)/wordpress/wp-load.php" >> $GITHUB_ENV
+
+      - name: Run PHP_CodeSniffer
+        run: |
+          vendor/bin/phpcs --standard=PSR12 src tests
 
       - name: Run PHPUnit
         run: |
