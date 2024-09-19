@@ -47,11 +47,11 @@ jobs:
 
       - name: Automatically fix coding standards issues with PHPCBF
         run: |
-          vendor/bin/phpcbf src tests
+          vendor/bin/phpcbf src tests || true
 
       - name: Run PHP_CodeSniffer
         run: |
-          vendor/bin/phpcs --standard=PSR12 src tests || true
+          vendor/bin/phpcs --standard=PSR12 src tests 
 
       - name: Run PHPUnit
         run: |
