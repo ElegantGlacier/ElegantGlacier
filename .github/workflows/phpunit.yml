@@ -41,6 +41,12 @@ jobs:
       - name: Set WP_LOAD_PATH environment variable
         run: echo "WP_LOAD_PATH=$(pwd)/wordpress/wp-load.php" >> $GITHUB_ENV
 
+      - name: Run PHP_CodeSniffer
+        uses: chelnak/phpcs-action@v2
+        with:
+          paths: 'src,tests'
+          standard: 'PSR12'
+
       - name: Run PHPUnit
         run: |
           vendor/bin/phpunit --configuration phpunit.xml
