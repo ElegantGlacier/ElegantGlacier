@@ -13,15 +13,11 @@ class ElegantGlacier {
         $loader = new FilesystemLoader($path . '/templates');
         self::$twig = new Environment($loader, []);
 
-        self::$twig->addFunction(new TwigFunction('asset', function ($path) {
-            // Adjust base URL if needed
-            return '/wp-content/themes/' . $path;
-        }));
+        self::$twig->addFunction(new TwigFunction('asset', function ($path) {return '/wp-content/themes/' . $path;}));
     }
 
     public static function render($template, $context = []) {
         return self::$twig->render($template, $context);}
-
     // Utility functions to wrap WordPress functions
     public static function getTitle() {
         return get_the_title();
