@@ -1,4 +1,5 @@
 <?php
+
 namespace ElegantGlacier;
 
 class Router {
@@ -17,7 +18,7 @@ class Router {
                 $pattern = preg_replace('/\/:([^\/]+)/', '/(?P<$1>[^/]+)', $routeUrl);
                 if (preg_match('#^' . $pattern . '$#', $url, $matches)) {
                     // Pass the captured parameter values as named arguments to the target function
-                    $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY); // Only keep named subpattern matches
+                    $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
                     call_user_func_array($target, $params);
                     return;
                 }
@@ -31,7 +32,6 @@ class Router {
     public function matchClassRoute() {
         $method = $_SERVER['REQUEST_METHOD'];
         $url = $_SERVER['REQUEST_URI'];
-        
         if (isset($this->routes[$method])) {
             foreach ($this->routes[$method] as $routeUrl => $target) {
                 $pattern = preg_replace('/\/:([^\/]+)/', '/(?P<$1>[^/]+)', $routeUrl);
@@ -40,11 +40,10 @@ class Router {
                     list($controller, $action) = explode('@', $target);
                     $controller = "Controllers\\{$controller}";
                     if (class_exists($controller) && method_exists($controller, $action)) {
-                        $controllerInstance = new $controller;
+                        $controllerInstance = new $controller();
                         call_user_func_array([$controllerInstance, $action], $params);
                     } else {
                         header("HTTP/1.0 404 Not Found");
-
                         echo "Not Found";
                     }
                     return;
@@ -56,4 +55,3 @@ class Router {
         echo "404 Not Found";
     }
 }
-

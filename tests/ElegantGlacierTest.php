@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class ElegantGlacierTest extends TestCase
 {
-
     public function testInit()
     {
         ElegantGlacier::init(__DIR__);
@@ -24,13 +23,12 @@ class ElegantGlacierTest extends TestCase
     public function testRender()
     {
         // Assuming you have a Twig template at this location
-        $templatePath = __DIR__ . '/path/to/templates/test.twig';
+        $templatePath = __DIR__ . '/templates/test.twig';
         file_put_contents($templatePath, '<p>{{ name }}</p>');
 
         ElegantGlacier::init(__DIR__);
         $output = ElegantGlacier::render('test.twig', ['name' => 'Test']);
         $this->assertSame('<p>Test</p>', $output);
-        
         // Clean up the template file after test
         unlink($templatePath);
     }
@@ -51,7 +49,7 @@ class ElegantGlacierTest extends TestCase
 
     public function testPostTypeRegistration()
     {
-        ElegantGlacier::PostType('portfolio');
+        ElegantGlacier::postType('portfolio');
 
         $this->assertTrue(post_type_exists('portfolio'));
     }

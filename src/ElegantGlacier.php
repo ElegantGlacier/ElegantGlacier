@@ -1,4 +1,5 @@
 <?php
+
 namespace ElegantGlacier;
 
 use Twig\Environment;
@@ -10,9 +11,7 @@ class ElegantGlacier {
 
     public static function init($path) {
         $loader = new FilesystemLoader($path . '/templates');
-        self::$twig = new Environment($loader, [
-//            'cache' => $path . '/cache',
-        ]);
+        self::$twig = new Environment($loader, []);
 
         self::$twig->addFunction(new TwigFunction('asset', function ($path) {
             // Adjust base URL if needed
@@ -21,8 +20,7 @@ class ElegantGlacier {
     }
 
     public static function render($template, $context = []) {
-        return self::$twig->render($template, $context);
-    }
+        return self::$twig->render($template, $context);}
 
     // Utility functions to wrap WordPress functions
     public static function getTitle() {
@@ -38,7 +36,7 @@ class ElegantGlacier {
         return $query->posts;
     }
 
-    public static function PostType($name, $args = []) {
+    public static function postType($name, $args = []) {
             $defaultArgs = [
                 'labels' => [
                     'name' => ucfirst($name),
@@ -49,18 +47,11 @@ class ElegantGlacier {
                 'rewrite' => ['slug' => $name],
                 'supports' => ['title', 'editor', 'thumbnail'],
             ];
-    
             $args = array_merge($defaultArgs, $args);
-    
-            add_action('init', function() use ($name, $args) {
-                register_post_type($name, $args);
+            add_action('init', 
+                function() use ($name, $args) {
+                    register_post_type($name, $args);
             });
     }
-    
 }
-
-// Ensure that this file's functions are globally accessible
-
 class_alias('ElegantGlacier\\ElegantGlacier', 'ElegantGlacier');
-
-

@@ -1,7 +1,10 @@
 <?php
 
+namespace ElegantGlacier\Tests;
+
 use PHPUnit\Framework\TestCase;
 use ElegantGlacier\Router;
+use ElegantGlacier\Tests\Controllers\TestController;
 
 class RouterTest extends TestCase
 {
@@ -16,7 +19,6 @@ class RouterTest extends TestCase
     {
         $router = new Router();
         $router->addRoute('GET', '/test', function() { return 'test'; });
-
         // Access protected property for testing
         $reflection = new ReflectionClass($router);
         $property = $reflection->getProperty('routes');
@@ -60,7 +62,7 @@ class RouterTest extends TestCase
     public function testMatchClassRoute()
     {
         $router = new Router();
-        $router->addRoute('GET', '/item', 'TestController@TestAction');
+        $router->addRoute('GET', '/item', 'TestController@testAction');
         
         // Register a TestController instance with dependency injection
         $controller = new TestController();
@@ -78,7 +80,7 @@ class RouterTest extends TestCase
     public function testMatchClassRouteWithParameters()
     {
         $router = new Router();
-        $router->addRoute('GET', '/item/:id', 'TestController@TestParam');
+        $router->addRoute('GET', '/item/:id', 'TestController@testParam');
         
         // Register a TestController instance with dependency injection
         $controller = new TestController();
@@ -91,19 +93,5 @@ class RouterTest extends TestCase
         $output = ob_get_clean();
 
         $this->assertSame('the id is 42', $output);
-    }
-}
-
-// Example Controller for testing purposes
-class TestController
-{
-    public function TestAction()
-    {
-        echo 'test action executed';
-    }
-
-    public function TestParam($id)
-    {
-        echo 'the id is ' . htmlspecialchars($id);
     }
 }
