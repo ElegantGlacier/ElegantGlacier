@@ -17,7 +17,7 @@ class ElegantGlacier {
     }
 
     public static function render($template, $context = []) {
-        return self::$twig->render($template, $context);}
+        echo self::$twig->render($template, $context);}
     // Utility functions to wrap WordPress functions
     public static function getTitle() {
         return get_the_title();
